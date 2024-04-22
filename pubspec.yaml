@@ -24,14 +24,14 @@ dependencies:
   shimmer: ^3.0.0
   gap: ^3.0.1
   hive: ^2.2.3
-  build_runner: ^2.4.9
+  connectivity_plus: ^5.0.2
+  cached_network_image: ^3.3.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^3.0.0
-  build_runner: ^2.4.9
 
 flutter:
 

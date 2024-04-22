@@ -9,7 +9,7 @@ import 'package:mysocial_app/app/modules/liked/widgets/custom_post_item.dart';
 import '../controllers/liked_controller.dart';
 
 class LikedView extends GetView<LikedController> {
-  const LikedView({Key? key}) : super(key: key);
+  const LikedView({super.key});
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
@@ -30,18 +30,43 @@ class LikedView extends GetView<LikedController> {
                 controller.getPostList();
               },
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: controller.postList.length,
-                  separatorBuilder: (context, index) => const Gap(20),
-                  itemBuilder: (context, index) {
-                    return CustomPostLikedItem(
-                      data: controller.postList[index],
-                      likePost: () => controller.deletePost(index),
-                    );
-                  },
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: controller.postList.isEmpty
+                    ? Padding(
+                        padding: EdgeInsets.all(Get.width * 0.1),
+                        child: Center(
+                            child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "Tidak ada postingan favorite +",
+                              style: b1Bold(),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                controller.getPostList();
+                              },
+                              child: Text(
+                                "Cek favorite",
+                                style:
+                                    b2Bold(colorText: CustomColor.primary700),
+                              ),
+                            )
+                          ],
+                        )),
+                      )
+                    : ListView.separated(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                        shrinkWrap: true,
+                        itemCount: controller.postList.length,
+                        separatorBuilder: (context, index) => const Gap(20),
+                        itemBuilder: (context, index) {
+                          return CustomPostLikedItem(
+                            data: controller.postList[index],
+                            likePost: () => controller.deletePost(index),
+                          );
+                        },
+                      ),
               ),
             ),
           ),

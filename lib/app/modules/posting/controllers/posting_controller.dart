@@ -125,7 +125,6 @@ class PostingController extends GetxController {
         item.owner?.picture ?? "",
       );
       await PostService().addPost(data);
-      ToastUtil.showNeutralMessage("Post Success");
       postList[index].liked = !postList[index].liked!;
       postList[index].likes = (item.likes! + 1);
       update();
@@ -173,6 +172,7 @@ class PostingController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    scrollController.dispose();
   }
 
   void increment() => count.value++;

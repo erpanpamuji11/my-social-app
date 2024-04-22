@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:mysocial_app/app/components/shimmer_comment.dart';
 import 'package:mysocial_app/app/core/style/style_color.dart';
 import 'package:mysocial_app/app/core/style/style_text.dart';
 import 'package:mysocial_app/app/core/utils/date_utils.dart';
@@ -13,7 +14,6 @@ class CustomBottomSheetComment extends GetView<CommentController> {
 
   @override
   Widget build(BuildContext context) {
-    
     return GetBuilder(
       init: CommentController(),
       builder: (controller) {
@@ -49,61 +49,77 @@ class CustomBottomSheetComment extends GetView<CommentController> {
                   ),
                 ),
                 const Gap(8),
-                Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    controller: controller.scrollController,
-                    itemCount: controller.hasMore.value
-                        ? controller.commentList.length + 1
-                        : controller.commentList.length,
-                    itemBuilder: (context, index) {
-                      if (index < controller.commentList.length) {
-                        return ListTile(
-                          tileColor: CustomColor.primary100,
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 20),
-                          leading: Container(
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: NetworkImage(controller
-                                        .commentList[index].owner?.picture ??
-                                    ""),
+                controller.isLoading == true
+                    ? shimmerComment()
+                    : controller.commentList.isEmpty
+                        ? Padding(
+                            padding: EdgeInsets.all(Get.width * 0.1),
+                            child: Center(
+                              child: Text(
+                                "Tidak ada Komentar",
+                                style: b2Reguler(),
                               ),
                             ),
-                          ),
-                          title: Text(
-                            controller.commentList[index].owner?.firstName ??
-                                "",
-                            style: b2Bold(),
-                          ),
-                          subtitle: Text(
-                            controller.commentList[index].message ?? "",
-                            style: b2Medium(),
-                          ),
-                          trailing: Text(
-                            DatesUtils.formatDate(
-                                controller.commentList[index].publishDate ??
-                                    DateTime.now()),
-                            style: b3Reguler(),
-                          ),
-                        );
-                      } else {
-                        return const Padding(
-                          padding: EdgeInsets.all(12.0),
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              backgroundColor: CustomColor.primary500,
-                              color: CustomColor.primary700,
+                          )
+                        : Expanded(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              controller: controller.scrollController,
+                              itemCount: controller.hasMore.value
+                                  ? controller.commentList.length + 1
+                                  : controller.commentList.length,
+                              itemBuilder: (context, index) {
+                                if (index < controller.commentList.length) {
+                                  return ListTile(
+                                    tileColor: CustomColor.primary100,
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        vertical: 12, horizontal: 20),
+                                    leading: Container(
+                                      height: 50,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          image: NetworkImage(controller
+                                                  .commentList[index]
+                                                  .owner
+                                                  ?.picture ??
+                                              ""),
+                                        ),
+                                      ),
+                                    ),
+                                    title: Text(
+                                      controller.commentList[index].owner
+                                              ?.firstName ??
+                                          "",
+                                      style: b2Bold(),
+                                    ),
+                                    subtitle: Text(
+                                      controller.commentList[index].message ??
+                                          "",
+                                      style: b2Medium(),
+                                    ),
+                                    trailing: Text(
+                                      DatesUtils.formatDate(controller
+                                              .commentList[index].publishDate ??
+                                          DateTime.now()),
+                                      style: b3Reguler(),
+                                    ),
+                                  );
+                                } else {
+                                  return const Padding(
+                                    padding: EdgeInsets.all(12.0),
+                                    child: Center(
+                                      child: CircularProgressIndicator(
+                                        backgroundColor: CustomColor.primary500,
+                                        color: CustomColor.primary700,
+                                      ),
+                                    ),
+                                  );
+                                }
+                              },
                             ),
                           ),
-                        );
-                      }
-                    },
-                  ),
-                ),
               ],
             ),
           ),

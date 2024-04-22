@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -6,9 +7,14 @@ import 'package:get/get.dart';
 import 'package:mysocial_app/app/core/style/style_color.dart';
 import 'package:mysocial_app/app/core/style/style_text.dart';
 import 'package:mysocial_app/app/modules/user/models/post_user_model/post_user_model.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CustomPostItem extends StatelessWidget {
-  const CustomPostItem({super.key, required this.data, required this.likePost, this.commentCallback});
+  const CustomPostItem(
+      {super.key,
+      required this.data,
+      required this.likePost,
+      this.commentCallback});
 
   final PostUserModel data;
   final Function() likePost;
@@ -45,9 +51,22 @@ class CustomPostItem extends StatelessWidget {
           const Gap(8),
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.network(
-              data.image ?? "",
-              fit: BoxFit.cover,
+            child: CachedNetworkImage(
+              key: UniqueKey(),
+              imageUrl: data.image ?? "",
+              fit: BoxFit.fill,
+              placeholder: (context, url) => Shimmer.fromColors(
+                baseColor: Colors.grey.shade400,
+                highlightColor: Colors.grey.shade100,
+                child: Container(
+                  height: Get.height * 0.3,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: CustomColor.primary100,
+                  ),
+                ),
+              ),
+              errorWidget: (context, url, error) => Icon(Icons.error),
             ),
           ),
           const Gap(12),

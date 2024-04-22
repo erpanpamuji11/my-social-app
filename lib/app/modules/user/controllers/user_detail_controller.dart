@@ -89,7 +89,6 @@ class UserDetailController extends GetxController {
         item.owner?.picture ?? "",
       );
       await PostService().addPost(data);
-      ToastUtil.showNeutralMessage("Post Success");
       postList[index].liked = !postList[index].liked!;
       postList[index].likes = (item.likes! + 1);
       update();
@@ -114,5 +113,6 @@ class UserDetailController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    scrollController.dispose();
   }
 }

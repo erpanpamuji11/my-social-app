@@ -16,7 +16,6 @@ class LikedController extends GetxController {
       PostService().deletePost(index);
       update();
       getPostList();
-      ToastUtil.showNeutralMessage("success delete");
     } catch (e) {
       ToastUtil.showNeutralMessage("failed delete");
     }
@@ -35,10 +34,6 @@ class LikedController extends GetxController {
     getPostList();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
 
   void increment() => count.value++;
 }

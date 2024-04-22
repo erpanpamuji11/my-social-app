@@ -11,7 +11,7 @@ import 'package:mysocial_app/app/core/style/style_text.dart';
 import '../controllers/posting_controller.dart';
 
 class PostingView extends GetView<PostingController> {
-  const PostingView({Key? key}) : super(key: key);
+  const PostingView({super.key});
   @override
   Widget build(BuildContext context) {
     return GetBuilder(

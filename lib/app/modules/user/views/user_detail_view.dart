@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
@@ -133,60 +131,66 @@ class UserDetailView extends GetView<UserDetailController> {
                             horizontal: 20,
                           ),
                           child: shimmerPost())
-                      : ListView.separated(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: controller.hasMore.value
-                              ? controller.postList.length + 1
-                              : controller.postList.length,
-                          separatorBuilder: (context, index) => Column(
-                            children: [
-                              const Gap(12),
-                              Container(
-                                height: 2,
-                                width: Get.width,
-                                color: CustomColor.netral300,
-                              ),
-                              const Gap(12),
-                            ],
-                          ),
-                          itemBuilder: (context, index) {
-                            if (index < controller.postList.length) {
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                ),
-                                child: CustomPostItem(
-                                  data: controller.postList[index],
-                                  likePost: () => controller.likePost(
-                                      controller.postList[index], index),
-                                  commentCallback: () {
-                                    showModalBottomSheet(
-                                      context: context,
-                                      backgroundColor: Colors.transparent,
-                                      isScrollControlled: true,
-                                      builder: (context) =>
-                                          CustomBottomSheetComment(
-                                        postId:
-                                            controller.postList[index].id ?? "",
-                                      ),
-                                    );
-                                  },
-                                ),
-                              );
-                            } else {
-                              return const Padding(
-                                padding: EdgeInsets.all(12.0),
-                                child: Center(
-                                  child: CircularProgressIndicator(
-                                    backgroundColor: CustomColor.primary500,
-                                    color: CustomColor.primary700,
+                      : controller.postList.isEmpty
+                          ? Padding(
+                            padding: EdgeInsets.all(Get.width * 0.1),
+                            child: Center(child: Text("Tidak ada Postingan", style: b2Reguler(),)),
+                          )
+                          : ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: controller.hasMore.value
+                                  ? controller.postList.length + 1
+                                  : controller.postList.length,
+                              separatorBuilder: (context, index) => Column(
+                                children: [
+                                  const Gap(12),
+                                  Container(
+                                    height: 2,
+                                    width: Get.width,
+                                    color: CustomColor.netral300,
                                   ),
-                                ),
-                              );
-                            }
-                          },
-                        )
+                                  const Gap(12),
+                                ],
+                              ),
+                              itemBuilder: (context, index) {
+                                if (index < controller.postList.length) {
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                    ),
+                                    child: CustomPostItem(
+                                      data: controller.postList[index],
+                                      likePost: () => controller.likePost(
+                                          controller.postList[index], index),
+                                      commentCallback: () {
+                                        showModalBottomSheet(
+                                          context: context,
+                                          backgroundColor: Colors.transparent,
+                                          isScrollControlled: true,
+                                          builder: (context) =>
+                                              CustomBottomSheetComment(
+                                            postId:
+                                                controller.postList[index].id ??
+                                                    "",
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  );
+                                } else {
+                                  return const Padding(
+                                    padding: EdgeInsets.all(12.0),
+                                    child: Center(
+                                      child: CircularProgressIndicator(
+                                        backgroundColor: CustomColor.primary500,
+                                        color: CustomColor.primary700,
+                                      ),
+                                    ),
+                                  );
+                                }
+                              },
+                            )
                 ],
               ),
             ),
