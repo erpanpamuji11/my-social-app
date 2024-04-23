@@ -6,6 +6,7 @@ import 'package:mysocial_app/app/components/bottomsheet_comment.dart';
 import 'package:mysocial_app/app/components/custom_post_item.dart';
 import 'package:mysocial_app/app/components/shimmer_detail_user.dart';
 import 'package:mysocial_app/app/components/shimmer_post.dart';
+import 'package:mysocial_app/app/core/constants/constant_text.dart';
 import 'package:mysocial_app/app/core/style/style_color.dart';
 import 'package:mysocial_app/app/core/style/style_text.dart';
 import 'package:mysocial_app/app/modules/user/controllers/user_detail_controller.dart';
@@ -22,7 +23,7 @@ class UserDetailView extends GetView<UserDetailController> {
           appBar: AppBar(
             backgroundColor: CustomColor.primary100,
             title: Text(
-              'Detail Pengguna',
+              ConstantText.detailUser,
               style: h4Bold(),
             ),
           ),
@@ -120,7 +121,7 @@ class UserDetailView extends GetView<UserDetailController> {
                       horizontal: 20,
                     ),
                     child: Text(
-                      "Postingan",
+                      ConstantText.post,
                       style: b1Bold(),
                     ),
                   ),
@@ -134,7 +135,7 @@ class UserDetailView extends GetView<UserDetailController> {
                       : controller.postList.isEmpty
                           ? Padding(
                             padding: EdgeInsets.all(Get.width * 0.1),
-                            child: Center(child: Text("Tidak ada Postingan", style: b2Reguler(),)),
+                            child: Center(child: Text(ConstantText.emptyPost, style: b2Reguler(),)),
                           )
                           : ListView.separated(
                               physics: const NeverScrollableScrollPhysics(),

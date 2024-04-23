@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:mysocial_app/app/components/bottomsheet_comment.dart';
 import 'package:mysocial_app/app/components/custom_post_item.dart';
 import 'package:mysocial_app/app/components/shimmer_post.dart';
+import 'package:mysocial_app/app/core/constants/constant_text.dart';
 import 'package:mysocial_app/app/core/style/style_color.dart';
 import 'package:mysocial_app/app/core/style/style_text.dart';
 
@@ -21,7 +22,7 @@ class PostingView extends GetView<PostingController> {
           appBar: AppBar(
             backgroundColor: CustomColor.primary700,
             title: Text(
-              'Postingan',
+              ConstantText.post,
               style: h3Bold(colorText: CustomColor.primary100),
             ),
             automaticallyImplyLeading: false,

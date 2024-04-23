@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
         useMaterial3: true,
       ),
+      debugShowCheckedModeBanner: false,
       initialRoute: AppPages.INITIAL,
       defaultTransition: Transition.cupertino,
       getPages: AppPages.routes,

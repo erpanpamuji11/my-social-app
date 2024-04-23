@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
+import 'package:mysocial_app/app/core/constants/constant_text.dart';
 import 'package:mysocial_app/app/core/style/style_color.dart';
 import 'package:mysocial_app/app/core/style/style_text.dart';
 import 'package:mysocial_app/app/modules/liked/widgets/custom_post_item.dart';
@@ -19,7 +20,7 @@ class LikedView extends GetView<LikedController> {
           appBar: AppBar(
             backgroundColor: CustomColor.primary700,
             title: Text(
-              'Favorite',
+              ConstantText.favorite,
               style: h3Bold(colorText: CustomColor.primary100),
             ),
             automaticallyImplyLeading: false,
@@ -39,7 +40,7 @@ class LikedView extends GetView<LikedController> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              "Tidak ada postingan favorite +",
+                              ConstantText.emptyFavorite,
                               style: b1Bold(),
                             ),
                             TextButton(
@@ -47,7 +48,7 @@ class LikedView extends GetView<LikedController> {
                                 controller.getPostList();
                               },
                               child: Text(
-                                "Cek favorite",
+                                ConstantText.checkFavorite,
                                 style:
                                     b2Bold(colorText: CustomColor.primary700),
                               ),

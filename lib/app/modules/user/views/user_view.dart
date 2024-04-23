@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:mysocial_app/app/components/shimmer_user.dart';
+import 'package:mysocial_app/app/core/constants/constant_text.dart';
 import 'package:mysocial_app/app/core/style/style_color.dart';
 import 'package:mysocial_app/app/core/style/style_text.dart';
 import 'package:mysocial_app/app/modules/user/views/user_detail_view.dart';
@@ -19,7 +20,7 @@ class UserView extends GetView<UserController> {
           backgroundColor: CustomColor.background,
           appBar: AppBar(
             title: Text(
-              'mySocial',
+              ConstantText.myApp,
               style: h2Bold(),
             ),
           ),
